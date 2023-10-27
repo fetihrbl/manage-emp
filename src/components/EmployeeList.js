@@ -57,10 +57,9 @@ const EmployeeList = () => {
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
                         Close Modal
-                    </Button> 
+                    </Button>
                 </Modal.Footer>
             </Modal>
-
         </>
     )
 }

@@ -5,7 +5,6 @@ import EmployeeContextProvider from "./contexts/EmployeeContext";
 function App() {
     return (
         <div className="App">
-
             <div className="container-xl">
                 <div className="table-responsive">
                     <div className="table-wrapper">
