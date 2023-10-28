@@ -1,31 +1,57 @@
-import { useContext } from "react";
-import { Button } from "react-bootstrap";
+import { useContext, useState, useEffect } from "react";
+import  EditForm  from './EditForm'
 import { EmployeeContext } from "../contexts/EmployeeContext";
+import { Button, Modal } from "react-bootstrap";
 
-const Employee = ({ employees }) => {
+const Employee = ({ employee }) => {
 
     const { deleteEmployee } = useContext(EmployeeContext);
 
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
+    useEffect(() => {
+        handleClose();
+    }, [employee])
+
+
     return (
         <>
-            {
-                employees.map((employee) => (
-                    <tr key={employee.id}>
-                        <td>{employee.name}</td>
-                        <td>{employee.email}</td>
-                        <td>{employee.address}</td>
-                        <td>{employee.phone}</td>
-                        <td>
 
-                            <Button href="#editEmployeeModal" className="btn text-warning btn-act transparent-button" 
-                            data-toggle="modal"><i className="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></Button>
 
-                            <Button onClick={() => deleteEmployee(employee.id)} href="#deleteEmployeeModal" className="btn text-danger btn-act transparent-button" data-toggle="modal"><i className="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></Button>
 
-                        </td>
-                    </tr>
-                ))
-            }
+            <td>{employee.name}</td>
+            <td>{employee.email}</td>
+            <td>{employee.address}</td>
+            <td>{employee.phone}</td>
+            <td>
+
+                <Button onClick={handleShow} href="#editEmployeeModal" className="btn text-warning btn-act transparent-button"
+                    data-toggle="modal"><i className="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></Button>
+
+                <Button onClick={() => deleteEmployee(employee.id)} href="#deleteEmployeeModal" className="btn text-danger btn-act transparent-button" data-toggle="modal"><i className="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></Button>
+
+            </td>
+
+            <Modal show={show} onHide={handleClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title>
+                        Update Employee
+                    </Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <EditForm theEmployee={employee}/>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                        Close Modal
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+
+
         </>
     )
 }
