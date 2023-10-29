@@ -19,7 +19,7 @@ const Paginotion = ({pages, setCurrentPage, currentEmployees, sortedEmployees}) 
     }, [currentButton, setCurrentPage])
 
     return (
-        <div className="clearfix">
+        <div className="clearfix pagination-item">
             <div className="hint-text">Showing <b>{currentEmployees.length}</b> out of <b>{sortedEmployees.length}</b> entries</div>
             <ul className="pagination">
                 <li className={`${currentButton === 1 ? 'page-item disabled' : 'page-item'}`}><a href="#!" className="page-link"
