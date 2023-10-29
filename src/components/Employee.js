@@ -1,7 +1,7 @@
 import { useContext, useState, useEffect } from "react";
-import  EditForm  from './EditForm'
+import EditForm from './EditForm'
 import { EmployeeContext } from "../contexts/EmployeeContext";
-import { Button, Modal } from "react-bootstrap";
+import { Button, Modal, OverlayTrigger, Tooltip } from "react-bootstrap";
 
 const Employee = ({ employee }) => {
 
@@ -19,20 +19,31 @@ const Employee = ({ employee }) => {
 
     return (
         <>
-
-
-
+        
             <td>{employee.name}</td>
             <td>{employee.email}</td>
             <td>{employee.address}</td>
             <td>{employee.phone}</td>
             <td>
 
-                <Button onClick={handleShow} href="#editEmployeeModal" className="btn text-warning btn-act transparent-button"
-                    data-toggle="modal"><i className="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></Button>
+                <OverlayTrigger
+                    overlay={
+                        <Tooltip id={'tooltip-top'}>
+                            Edit
+                        </Tooltip>
+                    }>
+                    <Button onClick={handleShow} href="#editEmployeeModal" className="btn text-warning btn-act transparent-button"
+                        data-toggle="modal"><i className="material-icons">&#xE254;</i></Button>
+                </OverlayTrigger>
 
-                <Button onClick={() => deleteEmployee(employee.id)} href="#deleteEmployeeModal" className="btn text-danger btn-act transparent-button" data-toggle="modal"><i className="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></Button>
-
+                <OverlayTrigger
+                    overlay={
+                        <Tooltip id={'tooltip-top'}>
+                            Delete
+                        </Tooltip>
+                    }>
+                    <Button onClick={() => deleteEmployee(employee.id)} href="#deleteEmployeeModal" className="btn text-danger btn-act transparent-button" data-toggle="modal"><i className="material-icons">&#xE872;</i></Button>
+                </OverlayTrigger>
             </td>
 
             <Modal show={show} onHide={handleClose}>
@@ -42,7 +53,7 @@ const Employee = ({ employee }) => {
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <EditForm theEmployee={employee}/>
+                    <EditForm theEmployee={employee} />
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
@@ -50,7 +61,6 @@ const Employee = ({ employee }) => {
                     </Button>
                 </Modal.Footer>
             </Modal>
-
 
         </>
     )

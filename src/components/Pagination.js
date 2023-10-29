@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 
 
 
-const Paginotion = ({pages, setCurrentPage}) => {
+const Paginotion = ({pages, setCurrentPage, currentEmployees, sortedEmployees}) => {
 
     const numOfpages = [];
 
@@ -20,7 +20,7 @@ const Paginotion = ({pages, setCurrentPage}) => {
 
     return (
         <div className="clearfix">
-            <div className="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
+            <div className="hint-text">Showing <b>{currentEmployees.length}</b> out of <b>{sortedEmployees.length}</b> entries</div>
             <ul className="pagination">
                 <li className={`${currentButton === 1 ? 'page-item disabled' : 'page-item'}`}><a href="#!" className="page-link"
                     onClick={() => setCurrentButton((Prev) => Prev === 1 ? Prev : Prev - 1)}
